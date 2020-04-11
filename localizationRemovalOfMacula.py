@@ -22,11 +22,13 @@ lab=cv.cvtColor(res,cv.COLOR_BGR2LAB)
 
 
 lab_planes = cv.split(lab)
-clahe=cv.createCLAHE(clipLimit=9.0)
+clahe=cv.createCLAHE(clipLimit=20.0,tileGridSize=(5,5))
 lab_planes[0]=clahe.apply(lab_planes[0])
-# lab=cv.merge(lab_planes[0])
-
+lab_planes[1]=clahe.apply(lab_planes[1])
+lab_planes[2]=clahe.apply(lab_planes[2])
+lab=cv.merge(lab_planes[0])
 blur =cv.blur(lab_planes[0],(9,9))
+
 
 # cv.imshow('mask',mask)
 cv.imshow('res',res)
@@ -34,6 +36,7 @@ cv.imshow('res',res)
 cv.imshow('NewSize',resized)
 cv.imshow('lab',lab_planes[0])
 cv.imshow('blur',blur)
+# cv.imshow('l',lab)
 
 
 # cv.imshow('testpng',tmp)

@@ -2,7 +2,7 @@ import cv2 as cv
 import numpy as np
 from matplotlib import pyplot as plt
 
-img=cv.imread('retina2.jpg', 1)
+img=cv.imread('retina5.jpg', 1)
 
 scale_percent = 30
 width = int(img.shape[1] * scale_percent / 100)
@@ -18,7 +18,7 @@ green_channel = resized[:,:,1]
 #equalizations
 equ=cv.equalizeHist(green_channel)
 #clahe
-clahe=cv.createCLAHE(clipLimit=2,tileGridSize=(8,8))
+clahe=cv.createCLAHE(clipLimit=4,tileGridSize=(8,8))
 cl1=clahe.apply(green_channel)
 # lab=cv.cvtColor(green_channel,cv.COLOR_BGR2LAB)
 # lab_planes = cv.split(lab)
@@ -36,7 +36,6 @@ th2=cv.adaptiveThreshold(blu1,255,cv.ADAPTIVE_THRESH_GAUSSIAN_C,cv.THRESH_BINARY
 
 #subtraction
 subtract=cv.subtract(blu,cl1)
-
 th1=cv.adaptiveThreshold(subtract,255,cv.ADAPTIVE_THRESH_MEAN_C,cv.THRESH_BINARY,11,2)
 
 # gradient=cv.morphologyEx(subtract,cv.MORPH_GRADIENT,kernel)
@@ -50,7 +49,7 @@ edges=cv.Canny(blu1,100,200)
 _,threshold = cv.threshold(gray,0,255,cv.THRESH_BINARY+cv.THRESH_OTSU)
 contours,hierarchy=cv.findContours(threshold,cv.RETR_LIST,cv.CHAIN_APPROX_SIMPLE)
 
-threshold_blob_size = 4
+threshold_blob_size = 50
 
 for i in range(1,len(contours)):
     index_level =int(hierarchy[0][i][1])
@@ -67,12 +66,6 @@ closingMorpho =cv.morphologyEx(threshold,cv.MORPH_CLOSE,kernel)
 
 # cv.drawContours(resized,contours,-1,(0,0,255),1)
 # cv.polylines(threshold,contours,1,(255,255,255))
-
-
-
-
-
-
 
 
 #ALLshow

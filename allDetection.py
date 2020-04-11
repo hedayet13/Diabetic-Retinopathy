@@ -63,27 +63,11 @@ def removalOfMacula(Image):
 
 
 # def microaneurysmDetection(Image):
-#     hsv_image = cv.cvtColor(Image, cv.COLOR_BGR2HSV)
-#     h, s, v = cv.split(hsv_image)
-#     clahe = cv.createCLAHE(clipLimit=9.0, tileGridSize=(750, 60))
-#     h = clahe.apply(h)
-#     s = clahe.apply(s)
-#     v = clahe.apply(v)
-#     hsv_image = cv.merge([h, s, v])
-#     hsv_image = cv.cvtColor(hsv_image, cv.COLOR_HSV2BGR)
-#     blur = cv.blur(hsv_image, (5, 5))
-#     gray = cv.cvtColor(blur, cv.COLOR_BGR2GRAY)
-#     gblur = cv.GaussianBlur(gray, (9, 9), 1)
-#
-#     (minVal, maxVal, minLoc, maxLoc) = cv.minMaxLoc(gblur)
-#     image = cv.circle(Image, maxLoc, 25, (0, 0, 0), -1)
-#
+#     Image=removalOpticDisc(Image)
 #     lab1 = cv.cvtColor(Image, cv.COLOR_BGR2LAB)
-#
 #     b, g, r = cv.split(Image)
 #     lab_planes = cv.split(lab1)
 #     clahe = cv.createCLAHE(clipLimit=9.0, tileGridSize=(1, 1))
-#
 #     b = clahe.apply(b)
 #     g = clahe.apply(g)
 #     r = clahe.apply(r)
